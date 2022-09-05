@@ -56,8 +56,6 @@ async function updateContactById (contactId, {name, email, phone}) {
     return books[index];
 }
 
-
-
 module.exports = {
   listContacts,
   getContactById,
