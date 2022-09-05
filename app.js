@@ -1,14 +1,14 @@
 const express = require('express')
-const logger = require('morgan')
+const logger = require('morgan')//пакет для логирование который выводит в консоль сообшение куда пошел запрос и какой ответ отправлен
 const cors = require('cors')
 
 const contactsRouter = require('./routes/api/contacts')
 
 const app = express()
 
-const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
+const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'//если мы запустили в дев режиме то подробное а если продакшн то короткие сообщение 
 
-app.use(logger(formatsLogger))
+app.use(logger(formatsLogger))//выводит в подродном режиме 
 app.use(cors())
 app.use(express.json())
 
@@ -19,7 +19,8 @@ app.use((req, res) => {
 })
 
 app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message })
+  const { status = 500, message = "Server error!" } = err;
+  res.status(status).json({ message })
 })
 
 module.exports = app
