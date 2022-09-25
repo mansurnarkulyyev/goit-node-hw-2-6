@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi"); 
+const { handleMongooseSchemaError } = require("../helpers");
 
 const contactSchema = new Schema(//Схема
   {
@@ -17,6 +18,11 @@ const contactSchema = new Schema(//Схема
       type: Boolean,
       default: false,
     },
+     owner: {
+       type: Schema.Types.ObjectId,
+       ref: 'user',
+       required:true,
+    }
   },
   { versionKey: false, timestamps: true }//время создание и обновление создать ...
 );
@@ -25,6 +31,8 @@ const contactSchema = new Schema(//Схема
 // contacts => contact
 // categories => category
 // mice => mouse
+
+contactSchema.post("save", handleMongooseSchemaError);
 
 const addSchema = Joi.object({  //пишем проверку как проптайпс в реакте
   name: Joi.string().required(),
