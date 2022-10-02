@@ -5,9 +5,9 @@ const Joi = require("joi");
 const { handleMongooseSchemaError } = require("../helpers");
 
 const userSchema = new Schema({
-     name: {
-      type: String,
-      required: [true, "Set name for contact"],
+    name: {
+        type: String,
+        required: [true, "Set name for contact"],
     },
     password: {
         type: String,
@@ -26,6 +26,10 @@ const userSchema = new Schema({
     token: {
         type: String,
         default: null,
+    },
+    avatarUrl: {
+        type: String,
+        required:true,
     },
 },{versionKey:false, timestamps:true});
 

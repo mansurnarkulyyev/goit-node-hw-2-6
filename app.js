@@ -2,7 +2,6 @@ const express = require('express');
 const logger = require('morgan');//пакет для логирование который выводит в консоль сообшение куда пошел запрос и какой ответ отправлен
 const cors = require('cors');
 
-
 require("dotenv").config();
 
 const authRouter = require("./routes/api/auth");
@@ -16,6 +15,7 @@ const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';//ес�
 app.use(logger(formatsLogger));//выводит в подродном режиме 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
 app.use("/api/auth", authRouter);
 app.use("/api/contacts", contactsRouter);
