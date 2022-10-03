@@ -37,10 +37,9 @@ userSchema.post("save", handleMongooseSchemaError);
 
 const registerSchema = Joi.object({  //пишем проверку как проптайпс в реакте
   name: Joi.string().required(),
-  password: Joi.string().required(),
   email: Joi.string().required(),
+  password: Joi.string().required(),
   subscription: Joi.string().required(),
-  token: Joi.string().required(),
 });
 
 const loginSchema = Joi.object({  
@@ -59,3 +58,6 @@ module.exports = {
     User,
     schemas,
 };
+
+
+

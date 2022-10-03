@@ -16,7 +16,6 @@ const register = async (req, res) => {
     const hashPassword = await bcrypt.hash(password, 10);//bcrypt.hash захиширование пороля 10 это сложности пороля
    const avatarUrl = gravatar.url(email);
     const result = await User.create({ name, password: hashPassword, email, subscription, avatarUrl });
-    console.log(subscription);
 
     res.status(201).json({
         name: result.name,
