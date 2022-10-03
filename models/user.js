@@ -5,9 +5,9 @@ const Joi = require("joi");
 const { handleMongooseSchemaError } = require("../helpers");
 
 const userSchema = new Schema({
-     name: {
-      type: String,
-      required: [true, "Set name for contact"],
+    name: {
+        type: String,
+        required: [true, "Set name for contact"],
     },
     password: {
         type: String,
@@ -27,16 +27,19 @@ const userSchema = new Schema({
         type: String,
         default: null,
     },
+    avatarUrl: {
+        type: String,
+        required:true,
+    },
 },{versionKey:false, timestamps:true});
 
 userSchema.post("save", handleMongooseSchemaError);
 
 const registerSchema = Joi.object({  //пишем проверку как проптайпс в реакте
   name: Joi.string().required(),
-  password: Joi.string().required(),
   email: Joi.string().required(),
+  password: Joi.string().required(),
   subscription: Joi.string().required(),
-  token: Joi.string().required(),
 });
 
 const loginSchema = Joi.object({  
@@ -55,3 +58,6 @@ module.exports = {
     User,
     schemas,
 };
+
+
+

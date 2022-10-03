@@ -15,10 +15,12 @@ try {
     if (bearer !== "Bearer") {
         throw RequestError(401, "Not authorized");
     }
-
+    
     try {
         const { id } = jwt.verify(token, SECRET_KEY);
+
         const user = await User.findById(id);
+
         if (!user || !user.token) {
             throw RequestError(401, "Not authorized");
             // next(RequestError(401, "Not authorized"));
