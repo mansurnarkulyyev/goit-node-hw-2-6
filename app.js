@@ -9,7 +9,6 @@ const contactsRouter = require('./routes/api/contacts');
 
 const app = express();
 
-
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';//если мы запустили в дев режиме то подробное а если продакшн то короткие сообщение 
 
 app.use(logger(formatsLogger));//выводит в подродном режиме 
