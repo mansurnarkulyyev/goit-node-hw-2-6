@@ -20,12 +20,17 @@ const login = async (req, res) => {
         throw RequestError(401, "Email or password is wrong");
     }
 
+    if (!user.verify) {
+         throw RequestError(401, "Email not verify");
+    }
+
     const payload = {
         id: user._id,
     }
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "4d" });
     
-    await User.findOneAndUpdate({ id:user._id }, {token})
+
+     await User.findOneAndUpdate({_id:user._id }, { token })
     // await User.findByIdAndUpdate(user._id, {token})
 
     res.json({
